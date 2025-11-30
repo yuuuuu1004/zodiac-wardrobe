@@ -2,6 +2,7 @@
 from flask import Flask, request, render_template_string
 import requests
 from datetime import datetime, date
+import os
 
 try:
     from lunardate import LunarDate  # pip install lunardate
@@ -368,10 +369,8 @@ def index():
         now_str=now_str,
         api_key_not_set=api_key_not_set,
     )
-"""
+
 if __name__ == "__main__":
-    # 開發環境先用 debug=True，之後佈署可關掉
-    app.run(host="0.0.0.0", port=5000, debug=True)
-"""
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
+
